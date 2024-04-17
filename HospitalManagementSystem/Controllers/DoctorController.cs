@@ -19,10 +19,6 @@ namespace HospitalManagementSystem.Controllers
         [HttpPost("AddStaff")]
         public async Task<IActionResult> Register(RegistrationDTO model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(await _doctorService.RegisterUser(model));
         }
 
@@ -34,9 +30,9 @@ namespace HospitalManagementSystem.Controllers
         }
 
         [HttpPut("Diagnose-Assign-Nurse")]
-        public async Task<IActionResult> DiagnoseAndAssignNurse([FromForm] int AppointmentId, [FromForm] bool isCompleted, [FromForm] int? NurseId)
+        public async Task<IActionResult> DiagnoseAndAssignNurse([FromForm] int AppointmentId, [FromForm] int? NurseId)
         {
-            return Ok(await _doctorService.DiagnoseAndAssignNurse(AppointmentId, isCompleted, NurseId ?? null));
+            return Ok(await _doctorService.DiagnoseAndAssignNurse(AppointmentId, NurseId ?? null));
         }
 
         [HttpPut("RescheduleAppointment")]

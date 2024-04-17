@@ -17,7 +17,7 @@ namespace Repository.Interface
         Task<int> GetReceptionistscount();
         Task<bool> IsSameSpeciality(string value);
         Task<List<dynamic>> GetAppointmetDetailsAsync(int userId);
-        Task DiagnoseAndAssignNurseAsync(int AppointmentId, bool isCompleted, int? NurseId);
+        Task DiagnoseAndAssignNurseAsync(int AppointmentIde, int? NurseId);
         Task<int> GetdoctorId(int userid);
         Task<Appointment> GetAppointmetDetailsOfUserAsync(int oldAppointmentId);
         Task<bool> IsSlotAvailable(DateTime newTimeSlot);

@@ -20,10 +20,7 @@ namespace HospitalManagementSystem.Controllers
         [HttpPost("RegisterPatient")]
         public async Task<IActionResult> RegisterPatient(PatientDTO model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+           
             return Ok(await _receptionService.RegisterUser(model));
         }
 

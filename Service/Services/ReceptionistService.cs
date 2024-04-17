@@ -43,7 +43,7 @@ namespace Service.Services
 
         #region Register Patient By Receptionist
         /// <summary>
-        /// This Method is For Register Patient into user table by receotionist it will set password of user and send their credential into mail
+        /// This Method is For Register Patient into user table by receptionist it will set password of user and send their credential into mail
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -159,8 +159,7 @@ namespace Service.Services
                 #endregion
 
                 var patientEmail = await _recptionrepository.GetUserEmailByPatientIdAsync(user.PatientId); // user details from user table for sending email
-
-               
+        
                 var  doctorId = await _recptionrepository.GetCounsaltDoctorid(user.CounsaltDoctor);
 
                     // Create a new Appointment object using data from the DTO

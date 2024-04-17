@@ -31,7 +31,7 @@ namespace Service.Services
         /// <param name="NurseId"></param>
         /// <returns> string value after completion of task </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<string> DiagnoseAndAssignNurse(int AppointmentId, bool isCompleted, int? NurseId)
+        public async Task<string> DiagnoseAndAssignNurse(int AppointmentId, int? NurseId)
         {
             try
             {  
@@ -46,7 +46,7 @@ namespace Service.Services
 
                 }
 
-                await _doctorrepository.DiagnoseAndAssignNurseAsync(AppointmentId,isCompleted,NurseId);
+                await _doctorrepository.DiagnoseAndAssignNurseAsync(AppointmentId,NurseId);
                 return NurseId.HasValue
                                         ? "Diagnosis marked as complete and nurse assigned successfully."
                                         : "Diagnosis marked as complete successfully.";
@@ -133,7 +133,9 @@ namespace Service.Services
 
                 if (string.IsNullOrEmpty(model.Role.Trim()))
                     return "Role is required";
-
+                string role = model.Role.Trim().ToLower();
+                if (role != "doctor" && role != "nurse" && role != "receptionist")
+                    return "please enter valid role ";
 
                 if (string.IsNullOrEmpty(model.Password.Trim()))
                     return "Password is required";
@@ -152,7 +154,7 @@ namespace Service.Services
 
                 #region Doctor
                 // For Doctor
-                if (model.Role == "Doctor")
+                if (model.Role == "Doctor" || model.Role == "doctor")
                 {
                     // calculate doctor count in database
                     var doctorCount = await _doctorrepository.GetDoctorcount();
@@ -173,7 +175,7 @@ namespace Service.Services
 
                 #region Nurse
                 // For Nurse
-                if (model.Role == "Nurse")
+                if (model.Role == "Nurse" || model.Role == "nurse")
                 {
                     // calculate nurse count in database
                     var nurseCount = await _doctorrepository.GetNursecount();
@@ -189,7 +191,7 @@ namespace Service.Services
 
                 #region Receptionists
                 // For Receptionists
-                if (model.Role == "Receptionist")
+                if (model.Role == "Receptionist" || model.Role == "receptionist")
                 {
                     // calculate Receptionists count in database
                     var receptionistCount = await _doctorrepository.GetReceptionistscount();

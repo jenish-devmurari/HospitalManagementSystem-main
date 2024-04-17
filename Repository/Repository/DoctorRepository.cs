@@ -34,7 +34,7 @@ namespace Repository.Repository
 
         public async Task<int> GetDoctorcount()
         { 
-                return await _context.Users.CountAsync(x => x.Role == "Doctor");
+                return await _context.Users.CountAsync(x => x.Role == "Doctor" ||  x.Role == "doctor") ;
         }
 
         public async Task<bool> IsSameSpeciality(string speciality)
@@ -44,17 +44,17 @@ namespace Repository.Repository
 
         public async Task<int> GetNursecount()
         {
-                return await _context.Users.CountAsync(x => x.Role == "Nurse");
+                return await _context.Users.CountAsync(x => x.Role == "Nurse" || x.Role == "nurse");
         }
 
         public async Task<int> GetReceptionistscount()
         {
-                return await _context.Users.CountAsync(x => x.Role == "Receptionist");
+                return await _context.Users.CountAsync(x => x.Role == "Receptionist" || x.Role == "receptionist");
         }
 
        
 
-        public async Task DiagnoseAndAssignNurseAsync(int AppointmentId, bool isCompleted, int? nurseId)
+        public async Task DiagnoseAndAssignNurseAsync(int AppointmentId, int? nurseId)
         {
             
                 var appointment = await _context.Appointments.FindAsync(AppointmentId);
@@ -65,7 +65,7 @@ namespace Repository.Repository
                 }
 
                 // Update the appointment details
-                appointment.IsCompleted = isCompleted;
+                appointment.IsCompleted = true;
                 appointment.NurseId = nurseId;
 
                 // Save the changes to the database

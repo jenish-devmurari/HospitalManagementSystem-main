@@ -14,7 +14,7 @@ namespace Service.Interface
 
         Task<List<object>> GetAllAppointment(int userId);
 
-        Task<string> DiagnoseAndAssignNurse(int AppointmentId, bool isCompleted, int? NurseId);
+        Task<string> DiagnoseAndAssignNurse(int AppointmentId, int? NurseId);
 
         Task<string> RescheduleAppointment(int userId,int oldAppointmentId, DateTime newTimeSlot);
 
